@@ -90,6 +90,12 @@ public struct Account: Thing, Created {
     */
     public let inboxCount: Int
     
+    /**
+    User profile image
+    example: https://www.redditstatic.com/avatars/avatar_default_04_A5A4A4.png
+    */
+    public let iconImg: String
+    
     public init(id: String) {
         self.id = id
         self.name = "\(Account.kind)_\(self.id)"
@@ -108,6 +114,7 @@ public struct Account: Thing, Created {
         goldExpiration = false
         hasVerifiedEmail = false
         inboxCount = 0
+        iconImg = ""
     }
     
     /**
@@ -133,6 +140,12 @@ public struct Account: Thing, Created {
         goldExpiration = data["gold_expiration"] as? Bool ?? false
         hasVerifiedEmail = data["has_verified_email"] as? Bool ?? false
         inboxCount = data["inbox_count"] as? Int ?? 0
+        
+        if let subreddit = data["subreddit"] as? JSONDictionary {
+            iconImg = subreddit["icon_img"] as? String ?? ""
+        } else {
+            iconImg = ""
+        }
     }
 }
 
