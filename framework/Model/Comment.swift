@@ -169,6 +169,8 @@ public struct Comment: Thing, Created, Votable {
     */
     public let ups: Int
     
+    public let authorFullname: String
+    
     /**
 	   if the comment is stickied
    	*/
@@ -221,6 +223,7 @@ public struct Comment: Thing, Created, Votable {
         numReports = 0
         ups = 0
         stickied = false
+        authorFullname = ""
     }
     
     public init(link: Link) {
@@ -256,6 +259,7 @@ public struct Comment: Thing, Created, Votable {
         modReports = link.modReports
         numReports = link.numReports
         ups = link.ups
+        authorFullname = ""
 	stickied = false
     }
     
@@ -297,6 +301,7 @@ public struct Comment: Thing, Created, Votable {
         created = data["created"] as? Int ?? 0
         authorFlairText = data["author_flair_text"] as? String ?? ""
         createdUtc = data["created_utc"] as? Int ?? 0
+        authorFullname = data["author_fullname"] as? String ?? ""
         
         if let distinguishedString = data["distinguished"] as? String {
             switch distinguishedString {
