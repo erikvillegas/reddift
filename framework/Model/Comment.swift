@@ -171,6 +171,8 @@ public struct Comment: Thing, Created, Votable {
     
     public let authorFullname: String
     
+    public let removed: Bool
+    
     /**
 	   if the comment is stickied
    	*/
@@ -224,6 +226,7 @@ public struct Comment: Thing, Created, Votable {
         ups = 0
         stickied = false
         authorFullname = ""
+        removed = false
     }
     
     public init(link: Link) {
@@ -260,7 +263,8 @@ public struct Comment: Thing, Created, Votable {
         numReports = link.numReports
         ups = link.ups
         authorFullname = ""
-	stickied = false
+        removed = false
+        stickied = false
     }
     
     /**
@@ -327,5 +331,7 @@ public struct Comment: Thing, Created, Votable {
         } else {
             replies = Listing()
         }
+        
+        removed = data["removed"] as? Bool ?? false
     }
 }
